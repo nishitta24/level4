@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Grand Finale</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* --- Deep space midnight cosmos layered with romantic violet and magenta gradients --- */
+            background-color: #0c0f26; 
+            background-image: 
+                radial-gradient(circle at 50% 40%, rgba(139, 92, 246, 0.25) 0%, transparent 60%), 
+                radial-gradient(circle at 30% 70%, rgba(236, 72, 153, 0.2) 0%, transparent 50%),  
+                radial-gradient(circle at 80% 20%, rgba(79, 70, 229, 0.3) 0%, transparent 60%),   
+                url('https://image.api.playgroundai.com/static/a/VbXb_D9hT2-Jb-E-N-L-S-Y-2.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            padding: 40px 15px; 
+        }
+
+        /* --- DEEP SPACE AURORA GLOW --- */
+        .aurora-glow-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 20%, rgba(244, 114, 182, 0.2) 0%, transparent 55%),
+                        radial-gradient(circle at 80% 30%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 20% 15%, rgba(6, 182, 212, 0.1) 0%, transparent 45%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 1;
+            animation: auroraBreathe 16s ease-in-out infinite alternate;
+        }
+
+        @keyframes auroraBreathe {
+            0% { opacity: 0.6; transform: scale(1) rotate(0deg); filter: blur(30px); }
+            50% { opacity: 0.9; transform: scale(1.06) translateY(-10px) rotate(1deg); filter: blur(40px); }
+            100% { opacity: 0.5; transform: scale(0.95) translateX(10px) rotate(-1deg); filter: blur(35px); }
+        }
+
+        /* --- HEART-SHAPED TWINKLING STARS --- */
+        .star-twinkle {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: var(--size);
+            line-height: 1;
+            pointer-events: none;
+            animation: pulse var(--duration) ease-in-out infinite;
+            opacity: var(--opacity);
+            z-index: 2;
+            text-shadow: 0 0 6px rgba(244, 114, 182, 0.8), 0 0 12px rgba(255, 255, 255, 0.5);
+            user-select: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; transform: scale(0.7) rotate(var(--rotation)); }
+            50% { opacity: 1; transform: scale(1.3) rotate(var(--rotation)); }
+        }
+
+        /* --- CONTAINER INTERACTIVE GLASS WINDOW --- */
+        .container {
+            background: rgba(10, 8, 22, 0.85);
+            backdrop-filter: blur(25px) saturate(150%);
+            -webkit-backdrop-filter: blur(25px) saturate(150%);
+            padding: 35px 22px;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 
+                        0 0 40px rgba(244, 114, 182, 0.15);
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8f9fa;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            color: #f472b6;
+            font-size: 1.75rem;
+            margin-bottom: 4px;
+            text-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+        }
+
+        h2 {
+            color: #c084fc;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            color: #e2e8f0;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* WINDOW STRUCTURES */
+        .window-pane {
+            display: none;
+            width: 100%;
+            animation: expandWindow 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        #window-1 {
+            display: block;
+        }
+
+        .quiz-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 22px 15px;
+            border-radius: 20px;
+            border: 1px dashed rgba(244, 114, 182, 0.4);
+            margin-bottom: 15px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .quiz-box p {
+            font-weight: 500;
+            color: #fca5a5;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            padding: 12px 15px;
+            width: 100%; 
+            max-width: 320px;
+            border-radius: 30px;
+            border: 2px solid #f472b6;
+            background: rgba(255, 255, 255, 0.95);
+            color: #0f172a;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+        }
+
+        .input-field:focus {
+            border-color: #f472b6;
+            box-shadow: 0 0 15px rgba(244, 114, 182, 0.6);
+        }
+
+        .heart-container {
+            margin: 15px auto;
+            width: 90px;
+            height: 80px;
+            display: block;
+        }
+
+        .heart-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .heart-btn::before, .heart-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 45px;
+            height: 72px;
+            border-radius: 45px 45px 0 0;
+            background: linear-gradient(to bottom, #f472b6, #9d174d);
+            box-shadow: 0 4px 15px rgba(244, 114, 182, 0.6);
+        }
+
+        .heart-btn::before { left: 45px; transform: rotate(-45deg); transform-origin: 0 100%; }
+        .heart-btn::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
+
+        .heart-btn span {
+            position: absolute;
+            z-index: 15;
+            color: white;
+            width: 100%;
+            left: 0;
+            top: 24px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .heart-btn:hover, .heart-btn:active { transform: scale(1.1); }
+
+        .envelope {
+            cursor: pointer;
+            background: rgba(244, 114, 182, 0.15);
+            padding: 18px;
+            border-radius: 15px;
+            border: 2px dashed #f472b6;
+            display: inline-block;
+            margin: 10px auto;
+            font-weight: bold;
+            color: #f472b6;
+            width: 100%;
+            max-width: 240px;
+            transition: all 0.3s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .envelope:hover { background: rgba(244, 114, 182, 0.28); transform: translateY(-3px); }
+
+        /* --- ROMANTIC POP-UP MODAL BOX --- */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(8, 5, 18, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .letter-modal {
+            background: #fffdfa; 
+            padding: 45px 25px 30px 25px;
+            border-radius: 24px;
+            box-shadow: inset 0 0 20px rgba(157, 23, 77, 0.08), 0 25px 50px rgba(0,0,0,0.6);
+            border: 3px solid #f472b6;
+            max-width: 450px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: left;
+            position: relative;
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* --- VISUAL HEART CUTOUT HEADER --- */
+        .heart-cutout-header {
+            width: 70px;
+            height: 60px;
+            position: relative;
+            margin: -20px auto 25px auto;
+            display: block;
+        }
+        .heart-cutout-header::before, .heart-cutout-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 35px;
+            height: 55px;
+            border-radius: 35px 35px 0 0;
+            background: linear-gradient(to bottom, #f472b6, #e11d48);
+        }
+        .heart-cutout-header::before { left: 35px; transform: rotate(-45deg); transform-origin: 0 100%; }
+        .heart-cutout-header::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
+
+        /* Typography settings inside letter popup */
+        .letter-modal p {
+            color: #4c0519; 
+            line-height: 1.65;
+            font-size: 0.98rem;
+            margin-bottom: 18px;
+        }
+
+        .letter-modal p:last-of-type {
+            margin-bottom: 25px;
+        }
+
+        .letter-modal strong {
+            color: #9d174d; 
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .close-popup-btn {
+            display: block;
+            background: linear-gradient(to right, #f472b6, #9d174d);
+            color: white;
+            border: none;
+            padding: 11px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin: 5px auto 0 auto;
+            box-shadow: 0 4px 10px rgba(244, 114, 182, 0.4);
+            transition: all 0.2s;
+        }
+
+        .close-popup-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(244, 114, 182, 0.5);
+        }
+
+        .status-update-box {
+            background: rgba(244, 114, 182, 0.15);
+            border: 1px dashed #f472b6;
+            padding: 15px;
+            border-radius: 16px;
+            margin-top: 20px;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #f472b6;
+            line-height: 1.5;
+        }
+
+        /* --- PHONE RESPONSIVE VIEWPORTS --- */
+        @media (max-width: 480px) {
+            body {
+                padding: 30px 12px; 
+            }
+            .container {
+                padding: 25px 15px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .letter-modal {
+                padding: 40px 18px 25px 18px;
+            }
+        }
+
+        @keyframes expandWindow {
+            from { opacity: 0; transform: scale(0.96) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.85) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="aurora-glow-overlay"></div>
+    <div id="stars-backdrop" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 2; overflow: hidden;"></div>
+
+    <div class="container">
+        <div id="header-area">
+            <h1>The Grand Finale</h1>
+            <h2 id="subtitle-element">Level 4: The Journey Begins</h2>
+        </div>
+
+        <div id="window-1" class="window-pane">
+            <p>Ready to unwrap the final mystery of your birthday?</p>
+            <div class="heart-container">
+                <button class="heart-btn" onclick="goToRiddle()">
+                    <span>Start</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="window-2" class="window-pane">
+            <div class="quiz-box">
+                <p>The Final Lockbox Riddle:<br>
+                "I can bring you closer without making you move an inch, and I can make hours vanish without a single ticking clock. I convert a warm touch into millions of glowing colored pixels, and I am the only reason our hearts stayed completely connected all day long today. What am I?"</p>
+                
+                <input type="text" id="answer-field" class="input-field" placeholder="Hint: It's what you're looking at...">
+                
+                <div class="heart-container">
+                    <button class="heart-btn" onclick="verifyFinalRiddle()">
+                        <span>Unseal</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="window-3" class="window-pane">
+            <h2 style="color: #f472b6; font-size: 1.35rem; text-shadow: 0 0 10px rgba(244,114,182,0.4); margin-bottom: 10px;">Quest Complete!</h2>
+            <p>You actually did it! You beat every single lock, answered every riddle, and followed me all the way to the very end of your day. Open it whenever you are ready, my love.</p>
+            
+            <div class="envelope" id="envelope-btn" onclick="openLetterPopup()">Open My Letter ✉️</div>
+
+            <div class="status-update-box">
+                "Happy Birthday, my love! The treasure hunt might be over, but our story is just getting started. I love you endlessly. Go get some peaceful sleep now!"
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="letter-popup">
+        <div class="letter-modal">
+            <div class="heart-cutout-header"></div>
+            
+            <p><strong>Hello Love,</strong></p>
+            
+ 
+            
+            <p>To the man who has stolen my heart,HAPPPPPPYYYYYYY BIRTHDAAAAAYYYYYYYYYY.This is the first one and I will be waiting for many more to come. I hope you liked it and wish to be next to you atleast next year</p>
+            
+            <p>Thank you for barging into my life when I needed someone the most.I know I mess up a lot but please tolerate with your drama queen(you got no choice).Uk what's the best part of my days are  when we have our calls.I wait the whole day for it .I loveeee youuu sooooo muchh.I used to hate the word 'baby' but now it's one of my favourite names.You have completely changed me .I was never someone who thought would doo all these for a man but here I am writing this letter unable to express what I actually feel but I promise to improvise(can't loose you,you're too precious).But there is only one thing which I am sure about is that "I LOVEE YOUUUUUU"</p>
+            
+            <p>A SECRET:(" I love watching you smile, your tired smile, the way you think, 10000000 times you set your hair. I just love everything.") We are still in the beginning of this rollercoaster ride but I want to end it with you being next to you all the time and never letting you be in peace.I know we both will get busy as it is peak for our career but please promise to never leave me. I wanna do everything with you from grabbing ice cream to travelling the world.Thank you for becoming my safe place where I can run to.</p>
+            
+            <p>Happiessstttttttt Birthdayyyyyyyy, kiddoo.Happy 21!!! I LOVEEEEEEEE YOUUUUUU SOOOOOOOOOOOOOO MUCHHHHHHHHHHHH ❤️</p>
+            
+            <button class="close-popup-btn" onclick="closeLetterPopup()">Close Letter</button>
+        </div>
+    </div>
+
+    <script>
+        function generateStarsGrid() {
+            const container = document.getElementById('stars-backdrop');
+            const totalStars = window.innerWidth < 500 ? 55 : 115;
+
+            for (let i = 0; i < totalStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star-twinkle');
+                star.innerHTML = '♥'; 
+                
+                const size = Math.random() * 9 + 6; 
+                const rotation = Math.random() * 30 - 15; 
+                
+                star.style.setProperty('--size', `${size}px`);
+                star.style.setProperty('--rotation', `${rotation}deg`);
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                
+                star.style.setProperty('--duration', `${Math.random() * 3.5 + 2.0}s`);
+                star.style.setProperty('--opacity', `${Math.random() * 0.7 + 0.3}`);
+                
+                container.appendChild(star);
+            }
+        }
+
+        function goToRiddle() {
+            document.getElementById('window-1').style.display = 'none';
+            document.getElementById('subtitle-element').innerText = "Level 4: The Ultimate Secret";
+            document.getElementById('window-2').style.display = 'block';
+        }
+
+        function verifyFinalRiddle() {
+            const entry = document.getElementById('answer-field').value.trim().toLowerCase();
+            
+            if (entry === 'screen' || entry.includes('screen') || entry.includes('phone') || entry.includes('internet') || entry.includes('display')) {
+                document.getElementById('window-2').style.display = 'none';
+                document.getElementById('subtitle-element').style.display = 'none';
+                document.getElementById('window-3').style.display = 'block';
+            } else {
+                alert("Access Denied! Think about the physical object or digital magic bridging the miles between us right now... 📱");
+            }
+        }
+
+        function openLetterPopup() {
+            document.getElementById('letter-popup').style.display = 'flex';
+        }
+
+        function closeLetterPopup() {
+            document.getElementById('letter-popup').style.display = 'none';
+        }
+
+        window.onload = generateStarsGrid;
+    </script>
+</body>
+</html>
